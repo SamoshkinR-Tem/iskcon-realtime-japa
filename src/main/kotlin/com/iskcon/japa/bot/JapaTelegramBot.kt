@@ -42,11 +42,11 @@ object JapaTelegramBot : TelegramLongPollingBot() {
     }
 
     private fun handleUserMessage(chatId: Long, userMsg: String?) {
-        logger.info("handleUserMessage")
         userMsg?.let {
             when {
                 it.lowercase().contains(START.key)
                         || it.lowercase().contains(BTN_UPDATE.key) -> {
+                    logger.info("handleUserMessage BTN_UPDATE")
                     saveChatEventToDatabase(
                         ChatEventEntity(
                             chatId = chatId,
@@ -56,6 +56,7 @@ object JapaTelegramBot : TelegramLongPollingBot() {
                 }
 
                 it.lowercase().contains(BTN_JOIN.key) -> {
+                    logger.info("handleUserMessage BTN_JOIN")
                     saveChatEventToDatabase(
                         ChatEventEntity(
                             chatId = chatId,
@@ -66,6 +67,7 @@ object JapaTelegramBot : TelegramLongPollingBot() {
                 }
 
                 it.lowercase().contains(BTN_LEAVE.key) -> {
+                    logger.info("handleUserMessage BTN_LEAVE")
                     saveChatEventToDatabase(
                         ChatEventEntity(
                             chatId = chatId,
